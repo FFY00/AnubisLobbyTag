@@ -34,7 +34,7 @@ public class PlayerQuitListener implements Listener{
             prefix = PermissionsEx.getUser(p).getGroups()[0].getPrefix();
         }
         Bukkit.getConsoleSender().sendMessage(p.getName() + "." + prefix);
-        // TODO: Send data...
+        ldp.setPrefix(p.getName(), prefix);
     }
 
 }
