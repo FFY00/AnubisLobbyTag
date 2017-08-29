@@ -1,0 +1,11 @@
+#  AnubisLobbyTag Config
+
+# Database Conection
+db:
+  host: ""
+  #port: "3306"
+  dbname: ""
+  user: ""
+  password: ""
+
+server_name: ""
