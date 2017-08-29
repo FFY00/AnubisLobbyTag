@@ -28,6 +28,7 @@ public abstract class DatabaseProviderModel {
         luser = user;
         lpassword = password;
         connect();
+        loadTable();
     }
 
     public DatabaseProviderModel(String host, String port, String db, String user, String password){
@@ -35,6 +36,7 @@ public abstract class DatabaseProviderModel {
         luser = user;
         lpassword = password;
         connect();
+        loadTable();
     }
 
     private boolean connect(){
@@ -48,6 +50,8 @@ public abstract class DatabaseProviderModel {
             return false;
         }
     }
+
+    protected void loadTable(){}
 
     public void version(){
         try{
