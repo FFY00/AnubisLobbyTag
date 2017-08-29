@@ -21,22 +21,24 @@ import java.sql.Statement;
  */
 public class DatabaseProvider extends DatabaseProviderModel{
 
-    protected String lsvname;
+    private String lsvname;
 
-    public DatabaseProvider(JavaPlugin plugin, String host, String db, String user, String password){
+    public DatabaseProvider(JavaPlugin plugin, String svname, String host, String db, String user, String password){
         super(plugin, host, db, user, password);
+        lsvname = svname.toLowerCase();
     }
 
-    public DatabaseProvider(JavaPlugin plugin, String host, String port, String db, String user, String password){
+    public DatabaseProvider(JavaPlugin plugin, String svname, String host, String port, String db, String user, String password){
         super(plugin, host, port, db, user, password);
+        lsvname = svname.toLowerCase();
     }
 
     protected void loadTable(){
         try{
-            Statement st = null;
-            ResultSet rs = null;
-            st = con.createStatement();
-            rs = st.executeQuery("CREATE TABLE IF NOT EXISTS " + lsvname + " (user STRING PRIMARY KEY, rank STRING)");
+            PreparedStatement pst = null;
+            pst = con.prepareStatement("CREATE TABLE IF NOT EXISTS ? (id INT PRIMARY KEY AUTO_INCREMENT, user CHAR(16), rank CHAR(16))");
+            pst.setString(1, lsvname);
+            pst.executeUpdate();
 
             Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §bLoaded rank table");
         } catch(SQLException ex){

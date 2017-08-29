@@ -36,7 +36,7 @@ public class AnubisLobbyTag extends JavaPlugin {
         setupConfig();
         registerListeners();
 
-        dp = new DatabaseProvider(this, config.getString("db.host"), config.getString("db.dbname"), config.getString("db.user"), config.getString("db.password"));
+        dp = new DatabaseProvider(this, config.getString("server_name"), config.getString("db.host"), config.getString("db.dbname"), config.getString("db.user"), config.getString("db.password"));
     }
 
     @Override
