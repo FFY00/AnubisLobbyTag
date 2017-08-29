@@ -6,6 +6,7 @@
 
 package io.github.ffy00.provider.model;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.*;
@@ -56,7 +57,7 @@ public abstract class DatabaseProviderModel {
             rs = st.executeQuery("SELECT VERSION()");
 
             if (rs.next()) {
-                System.out.println(rs.getString(1));
+                Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §bDatabase version is §d§o" + rs.getString(1));
             }
         } catch(SQLException ex){
             ex.printStackTrace();
