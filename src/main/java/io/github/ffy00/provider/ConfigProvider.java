@@ -35,7 +35,6 @@ public class ConfigProvider {
     public FileConfiguration get(String name){
         Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §Loading config §d§o" + name);
         File f = new File(lplugin.getDataFolder(),  name);
-        Bukkit.getConsoleSender().sendMessage("§6" + f.getPath());
         if(!f.exists()){
             Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §bCreating config §d§o" + name);
             lplugin.saveResource(name, false);
