@@ -17,13 +17,15 @@ import java.sql.*;
  */
 public abstract class DatabaseProviderModel {
 
+    protected JavaPlugin lplugin;
     protected String lurl;
     protected String luser;
     protected String lpassword;
 
     protected Connection con = null;
 
-    public DatabaseProviderModel(String host, String db, String user, String password){
+    public DatabaseProviderModel(JavaPlugin plugin, String host, String db, String user, String password){
+        lplugin = plugin;
         lurl = "jdbc:mysql://" + host + ":3306" + "/" + db;
         luser = user;
         lpassword = password;
@@ -31,7 +33,8 @@ public abstract class DatabaseProviderModel {
         loadTable();
     }
 
-    public DatabaseProviderModel(String host, String port, String db, String user, String password){
+    public DatabaseProviderModel(JavaPlugin plugin, String host, String port, String db, String user, String password){
+        lplugin = plugin;
         lurl = "jdbc:mysql://" + host + ":" + port + "/" + db;
         luser = user;
         lpassword = password;
@@ -45,6 +48,8 @@ public abstract class DatabaseProviderModel {
 
             return true;
         } catch (SQLException ex) {
+            Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §4§l[!] §bCoudn't connect to the database!");
+            Bukkit.getPluginManager().disablePlugin(lplugin);
             ex.printStackTrace();
 
             return false;
