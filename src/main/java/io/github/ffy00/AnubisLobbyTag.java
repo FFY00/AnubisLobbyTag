@@ -7,8 +7,10 @@
 package io.github.ffy00;
 
 import io.github.ffy00.listeners.PlayerQuitListener;
+import io.github.ffy00.provider.ConfigProvider;
 import io.github.ffy00.provider.DatabaseProvider;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,40 +23,33 @@ import java.io.File;
  */
 public class AnubisLobbyTag extends JavaPlugin {
 
-    private PluginDescriptionFile pl;
-    private File bukkitFolder;
-    private File pluginsFolder;
-    private File pluginFolder;
     private PluginManager pm;
     private DatabaseProvider dp;
+    private ConfigProvider cp;
+
+    private FileConfiguration config;
 
     @Override
     public void onEnable(){
-        pl = getDescription();
-        Bukkit.getConsoleSender().sendMessage("§bEnabling §cAnubisLobbyTag §bv" + pl.getVersion() + " by FFY00!");
+        Bukkit.getConsoleSender().sendMessage("§bEnabling §cAnubisLobbyTag §bv" + getDescription().getVersion() + " by FFY00!");
 
         setupConfig();
         registerListeners();
 
-        dp = new DatabaseProvider(this, "158.69.203.154", "ffy00", "ffy00", "mwwKU9Dsjwe7nE7H");
-        dp.version();
+        dp = new DatabaseProvider(this, config.getString("db.host"), config.getString("db.dbname"), config.getString("db.user"), config.getString("db.password"));
     }
 
     @Override
     public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage("§bDisabling §cAnubisLobbyTag §bv" + pl.getVersion() + " by FFY00!");
+        Bukkit.getConsoleSender().sendMessage("§bDisabling §cAnubisLobbyTag §bv" + getDescription().getVersion() + " by FFY00!");
     }
 
-    /*
-    * Setup Config
-    */
+    /**
+     * Setup Config
+     */
     private void setupConfig(){
-        bukkitFolder = getDataFolder();
-        pluginsFolder = new File(bukkitFolder, "plugins");
-        pluginFolder = new File(pluginsFolder, pl.getName());
-        if(!new File (bukkitFolder, "config.yml").exists()){
-            saveDefaultConfig();
-        }
+        cp = new ConfigProvider(this);
+        config = cp.get();
     }
 
     /**
