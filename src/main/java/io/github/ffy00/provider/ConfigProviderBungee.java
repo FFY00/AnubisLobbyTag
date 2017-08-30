@@ -7,8 +7,9 @@
 package io.github.ffy00.provider;
 
 import net.md_5.bungee.api.plugin.Plugin;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import net.md_5.bungee.config.Configuration;
+import net.md_5.bungee.config.ConfigurationProvider;
+import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.*;
 
@@ -25,7 +26,7 @@ public class ConfigProviderBungee {
         lplugin = plugin;
     }
 
-    public FileConfiguration get(){
+    public Configuration get(){
         return get("config.yml");
     }
 
@@ -48,11 +49,11 @@ public class ConfigProviderBungee {
                 in.close();
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            lplugin.getLogger().info("§cAnubisLobbyTag §e>> §4§l[!] §bCouldn't save config §d§o" + name);
         }
     }
 
-    public FileConfiguration get(String name){
+    public Configuration get(String name){
         lplugin.getLogger().info("§cAnubisLobbyTag §e>> §bLoading config §d§o" + name);
         File f = new File(lplugin.getDataFolder(),  name);
         if(!f.exists()){
@@ -60,10 +61,16 @@ public class ConfigProviderBungee {
             saveResource(name, false);
             lplugin.getResourceAsStream(name);
         }
-        return YamlConfiguration.loadConfiguration(f);
+        Configuration c = null;
+        try{
+            c = ConfigurationProvider.getProvider(YamlConfiguration.class).load(f);
+        } catch (IOException ex){
+            lplugin.getLogger().info("§cAnubisLobbyTag §e>> §4§l[!] §bCouldn't save config §d§o" + name);
+        }
+        return c;
     }
 
-    public boolean save(FileConfiguration c, String name) {
+    public boolean save(Configuration c, String name) {
         File f = new File(lplugin.getDataFolder().getAbsoluteFile() + "plugins" + File.separator + lplugin.getDescription().getName() + File.separator + name);
         if (!f.exists()) {
             lplugin.getLogger().info("§cAnubisLobbyTag §e>> §bCreating config §d§o" + name);
@@ -71,7 +78,7 @@ public class ConfigProviderBungee {
         }
         try {
             lplugin.getLogger().info("§cAnubisLobbyTag §e>> §bSaving config §d§o" + name);
-            c.save(f);
+            ConfigurationProvider.getProvider(YamlConfiguration.class).save(c, f);
             return true;
         } catch (IOException ex) {
             lplugin.getLogger().info("§cAnubisLobbyTag §e>> §4§l[!] §bCouldn't save config §d§o" + name);
