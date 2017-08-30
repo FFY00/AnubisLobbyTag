@@ -33,7 +33,6 @@ public class PlayerQuitListener implements Listener{
         if(prefix == null){
             prefix = PermissionsEx.getUser(p).getGroups()[0].getPrefix();
         }
-        Bukkit.getConsoleSender().sendMessage(p.getName() + "." + prefix);
         ldp.setPrefix(p.getName(), prefix);
     }
 
