@@ -42,7 +42,7 @@ public class DatabaseProvider extends DatabaseProviderModel{
             st.executeUpdate("CREATE TABLE IF NOT EXISTS " + lsvname + " " +
                                 "(id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
                                 " nick VARCHAR(16), " +
-                                " rank VARCHAR(16)) ");
+                                " rank VARCHAR(32)) ");
 
             Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §bLoaded rank table");
         } catch(SQLException ex){

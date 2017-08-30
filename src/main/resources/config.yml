@@ -14,3 +14,31 @@ server_name: "lobby"
 server_list:
   - teste
   - teste2
+
+ranks:
+  - Diretor
+  - Sub-Diretor
+  - Gerente
+  - Coordenador
+  - Administrador
+  - Moderador
+  - Ajudante
+  - Youtuber
+  - MiniYT
+  - Vip
+  - Membro
+
+default_rank: Membro
+
+tags:
+  Diretor: "&3[Diretor] "
+  Sub-Diretor: "&b[Sub-Diretor] "
+  Gerente: "&5[Gerente] "
+  Coordenador: "&9[Coordenador] "
+  Administrador: "&c[Administrador] "
+  Moderador: "&2[Moderador] "
+  Ajudante: "&e[Ajudante] "
+  Youtuber: "&c[Youtuber] &f"
+  MiniYT: "&c[MiniYT] &f"
+  Vip: "&e[VIP] &f"
+  Membro: ""

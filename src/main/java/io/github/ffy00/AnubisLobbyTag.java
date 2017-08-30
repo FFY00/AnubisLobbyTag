@@ -15,8 +15,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-
 /**
  *
  * @author FFY00 <FFY00 at ffy00.github.io>
