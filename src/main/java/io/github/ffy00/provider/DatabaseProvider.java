@@ -73,7 +73,6 @@ public class DatabaseProvider extends DatabaseProviderModel{
 
             // Doesn't exist (Insert value)
             if(!exists){
-                Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §4§l[!] §bDoesn't exists");
                 pst = con.prepareStatement("INSERT INTO " + lsvname + " (nick, rank) VALUES (?, ?)");
                 pst.setString(1, name);
                 pst.setString(2, prefix);
