@@ -26,19 +26,23 @@ public class DatabaseProvider extends DatabaseProviderModel{
     public DatabaseProvider(JavaPlugin plugin, String svname, String host, String db, String user, String password){
         super(plugin, host, db, user, password);
         lsvname = svname.toLowerCase();
+        loadTable();
     }
 
     public DatabaseProvider(JavaPlugin plugin, String svname, String host, String port, String db, String user, String password){
         super(plugin, host, port, db, user, password);
         lsvname = svname.toLowerCase();
+        loadTable();
     }
 
     protected void loadTable(){
         try{
-            PreparedStatement pst = null;
-            pst = con.prepareStatement("CREATE TABLE IF NOT EXISTS ? (id INT PRIMARY KEY AUTO_INCREMENT, user CHAR(16), rank CHAR(16))");
-            pst.setString(1, lsvname);
-            pst.executeUpdate();
+            Statement st = null;
+            st = con.createStatement();
+            st.executeUpdate("CREATE TABLE IF NOT EXISTS " + lsvname + " " +
+                                "(id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
+                                " nick VARCHAR(16), " +
+                                " rank VARCHAR(16)) ");
 
             Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §bLoaded rank table");
         } catch(SQLException ex){
@@ -53,14 +57,14 @@ public class DatabaseProvider extends DatabaseProviderModel{
         ResultSet rs = null;
 
         try{
-            pst = con.prepareStatement("SELECT * FROM " + lsvname + " WHERE name = ?");
+            pst = con.prepareStatement("SELECT * FROM " + lsvname + " WHERE nick = ?");
             pst.setString(1, name);
             rs = pst.executeQuery();
 
             boolean exists = false;
             // Exists (Update value)
             while(rs.next()){
-                pst = con.prepareStatement("UPDATE " + lsvname + " SET rank = ? WHERE name = ?");
+                pst = con.prepareStatement("UPDATE " + lsvname + " SET rank = ? WHERE nick = ?");
                 pst.setString(1, prefix);
                 pst.setString(2, rs.getString(1));
                 pst.executeUpdate();
@@ -69,7 +73,7 @@ public class DatabaseProvider extends DatabaseProviderModel{
 
             // Doesn't exist (Insert value)
             if(!exists){
-                pst = con.prepareStatement("INSERT INTO " + lsvname + " (name, rank) VALUES (?, ?)");
+                pst = con.prepareStatement("INSERT INTO " + lsvname + " (nick, rank) VALUES (?, ?)");
                 pst.setString(1, name);
                 pst.setString(2, prefix);
                 pst.executeUpdate();
