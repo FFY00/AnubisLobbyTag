@@ -66,13 +66,14 @@ public class DatabaseProvider extends DatabaseProviderModel{
             while(rs.next()){
                 pst = con.prepareStatement("UPDATE " + lsvname + " SET rank = ? WHERE nick = ?");
                 pst.setString(1, prefix);
-                pst.setString(2, rs.getString(1));
+                pst.setString(2, rs.getString(2));
                 pst.executeUpdate();
                 exists = true;
             }
 
             // Doesn't exist (Insert value)
             if(!exists){
+                Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §4§l[!] §bDoesn't exists");
                 pst = con.prepareStatement("INSERT INTO " + lsvname + " (nick, rank) VALUES (?, ?)");
                 pst.setString(1, name);
                 pst.setString(2, prefix);
