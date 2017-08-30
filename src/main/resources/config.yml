@@ -8,4 +8,9 @@ db:
   user: ""
   password: ""
 
-server_name: ""
+lobby: true
+server_name: "lobby"
+
+server_list:
+  - teste
+  - teste2
