@@ -11,7 +11,6 @@ import io.github.ffy00.provider.ConfigProvider;
 import io.github.ffy00.provider.DatabaseProvider;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,9 +33,8 @@ public class AnubisLobbyTag extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("§bEnabling §cAnubisLobbyTag §bv" + getDescription().getVersion() + " by FFY00!");
 
         setupConfig();
-        registerListeners();
-
         dp = new DatabaseProvider(this, config.getString("server_name"), config.getString("db.host"), config.getString("db.dbname"), config.getString("db.user"), config.getString("db.password"));
+        registerListeners();
     }
 
     @Override
