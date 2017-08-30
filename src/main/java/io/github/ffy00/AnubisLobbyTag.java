@@ -6,6 +6,7 @@
 
 package io.github.ffy00;
 
+import io.github.ffy00.listeners.PlayerJoinListener;
 import io.github.ffy00.listeners.PlayerQuitListener;
 import io.github.ffy00.provider.ConfigProvider;
 import io.github.ffy00.provider.DatabaseProvider;
@@ -55,7 +56,11 @@ public class AnubisLobbyTag extends JavaPlugin {
      */
     private void registerListeners(){
         pm = getServer().getPluginManager();
-        pm.registerEvents(new PlayerQuitListener(dp), this);
+        if(config.getBoolean("lobby")){
+            pm.registerEvents(new PlayerJoinListener(dp, config), this);
+        } else {
+            pm.registerEvents(new PlayerQuitListener(dp), this);
+        }
     }
 
 }
