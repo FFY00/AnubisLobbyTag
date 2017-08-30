@@ -6,14 +6,21 @@
 
 package io.github.ffy00;
 
+import io.github.ffy00.provider.ConfigProviderBungee;
+import io.github.ffy00.provider.DatabaseProvider;
 import net.md_5.bungee.api.plugin.Plugin;
-import net.md_5.bungee.api.scheduler.GroupedThreadFactory;
+import org.bukkit.configuration.file.FileConfiguration;
 
 /**
  *
  * @author FFY00 <FFY00 at ffy00.github.io>
  */
 public class AnubisLobbyTagBungee extends Plugin {
+
+    private DatabaseProvider dp;
+    private ConfigProviderBungee cp;
+
+    private FileConfiguration config;
 
     @Override
     public void onEnable(){
@@ -24,6 +31,14 @@ public class AnubisLobbyTagBungee extends Plugin {
     @Override
     public void onDisable(){
         getLogger().info("§bDisabling §cAnubisLobbyTag §bv" + getDescription().getVersion() + " by FFY00!");
+    }
+
+    /**
+     * Setup Config
+     */
+    private void setupConfig(){
+        cp = new ConfigProviderBungee(this);
+        config = cp.get("");
     }
 
 }
