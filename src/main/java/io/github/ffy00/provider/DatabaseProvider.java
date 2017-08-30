@@ -81,8 +81,29 @@ public class DatabaseProvider extends DatabaseProviderModel{
 
         } catch (SQLException ex){
             Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §4§l[!] §bError sending player perfix §d(" + name + ")");
-            ex.printStackTrace();
         }
+    }
+
+    public String getPrefix(String name){
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try{
+            pst = con.prepareStatement("SELECT rank FROM " + lsvname + " WHERE nick = ?");
+            pst.setString(1, name);
+            rs = pst.executeQuery();
+
+            while(rs.next()){
+                return rs.getString(1);
+            }
+        } catch (SQLException ex){
+            Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §4§l[!] §bError getting player perfix §d(" + name + ")");
+        }
+        return null;
+    }
+
+    public void setServerName(String svname) {
+        lsvname = svname.toLowerCase();
     }
 
 }

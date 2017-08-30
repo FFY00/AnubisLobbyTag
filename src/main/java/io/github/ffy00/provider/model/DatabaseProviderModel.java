@@ -48,7 +48,6 @@ public abstract class DatabaseProviderModel {
         } catch (SQLException ex) {
             Bukkit.getConsoleSender().sendMessage("§cAnubisLobbyTag §e>> §4§l[!] §bCoudn't connect to the database!");
             Bukkit.getPluginManager().disablePlugin(lplugin);
-            ex.printStackTrace();
 
             return false;
         }
