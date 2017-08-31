@@ -35,12 +35,13 @@ ranks:
 default_rank: Membro
 
 # Group tags
+# Tags teem de ter no max 16 caracters!
 tags:
   Diretor: "&3[Diretor] "
   Sub-Diretor: "&b[Sub-Diretor] "
   Gerente: "&5[Gerente] "
   Coordenador: "&9[Coordenador] "
-  Administrador: "&c[Administrador] "
+  Administrador: "&c[Admin] "
   Moderador: "&2[Moderador] "
   Ajudante: "&e[Ajudante] "
   Youtuber: "&c[Youtuber] &f"

@@ -44,18 +44,19 @@ public class PlayerJoinListener implements Listener{
     public void onPlayerJoinEvent(PlayerJoinEvent e){
         String pname = e.getPlayer().getName();
         List<String> prefixes = new ArrayList<String>();
-        String prefix = lconfig.getString("tags." + lconfig.getString("default_rank")).replaceAll("&", "§");
+        String prefix = lconfig.getString("tags." + lconfig.getString("default_rank"));
 
         for(String name : lconfig.getStringList("server_list")){
             ldp.setServerName(name);
             prefixes.add(ldp.getPrefix(pname));
         }
 
+        loop:
         for(String name : lconfig.getStringList("ranks")){
             for(String gprefix : prefixes){
                 if(gprefix.toLowerCase().contains(name.toLowerCase())){
-                    prefix = lconfig.getString("tags." + name).replaceAll("&", "§");
-                    break;
+                    prefix = lconfig.getString("tags." + name);
+                    break loop;
                 }
             }
         }
@@ -65,12 +66,15 @@ public class PlayerJoinListener implements Listener{
             prefix = ldp.getPrefix(pname);
         }
 
+        String op = prefix;
+        prefix = prefix.length() > 14 ? prefix.substring(0, 16) : prefix;
         if(!tags.containsKey(prefix)){
             Team t = sc.registerNewTeam(prefix);
-            t.setPrefix(prefix);
+            t.setPrefix(prefix.replaceAll("&", "§"));
             tags.put(prefix, t);
         }
         tags.get(prefix).addEntry(pname);
+        e.getPlayer().setScoreboard(sc);
     }
 
 }
