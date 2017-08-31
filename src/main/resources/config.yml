@@ -8,13 +8,16 @@ db:
   user: ""
   password: ""
 
-lobby: true
-server_name: "lobby"
+lobby: true # Multiple lobbys allowed
+server_name: "lobby" # Name of the server in the DB, don't change once it has alreade been setup
 
+# List of all the servers, place the server's server_name here
 server_list:
   - teste
   - teste2
 
+# Order Maters! Player will get the highest rank!!
+# If the players has the 1st and 2nd rank, he will get the 1st
 ranks:
   - Diretor
   - Sub-Diretor
@@ -28,8 +31,10 @@ ranks:
   - Vip
   - Membro
 
+# Self-Explanatory
 default_rank: Membro
 
+# Group tags
 tags:
   Diretor: "&3[Diretor] "
   Sub-Diretor: "&b[Sub-Diretor] "
@@ -42,3 +47,13 @@ tags:
   MiniYT: "&c[MiniYT] &f"
   Vip: "&e[VIP] &f"
   Membro: ""
+
+# Forced tags
+forced_tags:
+  # Players tto force the tag
+  players:
+    - zehdahorta
+
+  # server_name of the server whose tag should be used
+  server_name:
+    zehdahorta: "teste2"

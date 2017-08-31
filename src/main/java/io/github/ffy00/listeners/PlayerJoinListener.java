@@ -18,6 +18,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
 import org.kitteh.tag.AsyncPlayerReceiveNameTagEvent;
 
 /**
@@ -29,39 +32,47 @@ public class PlayerJoinListener implements Listener{
     private DatabaseProvider ldp;
     private FileConfiguration lconfig;
 
-    private HashMap<String, String> tags = new HashMap<String, String>();
-    //private HashMap<String, Team> tags = new HashMap<String, Team>();
+    private HashMap<String, Team> tags = new HashMap<String, Team>();
+
+    private ScoreboardManager sm = Bukkit.getScoreboardManager();
+    private Scoreboard sc = sm.getNewScoreboard();
 
     public PlayerJoinListener(DatabaseProvider dp, FileConfiguration config){
         ldp = dp;
         lconfig = config;
-
-        for(String rank : config.getStringList("ranks")){
-
-        }
     }
 
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent e){
-        Player p = e.getPlayer();
+        String pname = e.getPlayer().getName();
         List<String> prefixes = new ArrayList<String>();
+        String prefix = lconfig.getString("tags." + lconfig.getString("default_rank")).replaceAll("&", "§");
 
         for(String name : lconfig.getStringList("server_list")){
             ldp.setServerName(name);
-            prefixes.add(ldp.getPrefix(p.getName()));
+            prefixes.add(ldp.getPrefix(pname));
         }
 
         for(String name : lconfig.getStringList("ranks")){
-            for(String prefix : prefixes){
-                if(prefix.toLowerCase().contains(name.toLowerCase())){
-                    p.setPlayerListName((lconfig.getString("tags." + name) + p.getName()).substring(0, 14));
-                    return;
+            for(String gprefix : prefixes){
+                if(gprefix.toLowerCase().contains(name.toLowerCase())){
+                    prefix = lconfig.getString("tags." + name).replaceAll("&", "§");
+                    break;
                 }
             }
         }
 
-        p.setPlayerListName(lconfig.getString(lconfig.getString("default_rank") + p.getName()).substring(0, 14));
+        if(lconfig.getStringList("forced_tags.players").contains(pname)){
+            ldp.setServerName(lconfig.getString("forced_tags.server_name." + pname));
+            prefix = ldp.getPrefix(pname);
+        }
 
+        if(!tags.containsKey(prefix)){
+            Team t = sc.registerNewTeam(prefix);
+            t.setPrefix(prefix);
+            tags.put(prefix, t);
+        }
+        tags.get(prefix).addEntry(p.getName());
     }
 
 }
