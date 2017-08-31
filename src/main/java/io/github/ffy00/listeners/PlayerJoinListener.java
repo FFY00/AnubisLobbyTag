@@ -14,14 +14,12 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
-import org.kitteh.tag.AsyncPlayerReceiveNameTagEvent;
 
 /**
  *
@@ -72,7 +70,7 @@ public class PlayerJoinListener implements Listener{
             t.setPrefix(prefix);
             tags.put(prefix, t);
         }
-        tags.get(prefix).addEntry(p.getName());
+        tags.get(prefix).addEntry(pname);
     }
 
 }
