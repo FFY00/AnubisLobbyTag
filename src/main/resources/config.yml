@@ -9,7 +9,7 @@ db:
   password: ""
 
 lobby: true # Multiple lobbys allowed
-server_name: "lobby" # Name of the server in the DB, don't change once it has alreade been setup
+server_name: "lobby" # Name of the server in the DB, don't change once it has already been setup
 
 # List of all the servers, place the server's server_name here
 server_list:
@@ -19,6 +19,7 @@ server_list:
 # Order Maters! Player will get the highest rank!!
 # If the players has the 1st and 2nd rank, he will get the 1st
 ranks:
+  ##GLobal Tags - High
   - Diretor
   - Sub-Diretor
   - Gerente
@@ -29,6 +30,30 @@ ranks:
   - Youtuber
   - MiniYT
   - Vip
+  ##Vips
+  #Vips Rankup-CP
+  - Pro
+  - Semipro
+  - Amador
+  #Vips Space
+  - Astronauta
+  - Marciano
+  - Alien
+  - Lunático
+  - Terráqueo
+  #Vips Ice
+  - Infernal
+  - Titan
+  - Lord
+  - Gladiador
+  - Guerreiro
+  #Vips Fire OP
+  - Imortal
+  - King
+  - Prince
+  - Spartan
+  - Soldier
+  ##Global Tags - Low
   - Membro
 
 # Self-Explanatory
@@ -37,9 +62,10 @@ default_rank: Membro
 # Group tags
 # Tags teem de ter no max 16 caracters!
 tags:
+  ##Tags Globais
   Diretor: "&3[Diretor] "
   Sub-Diretor: "&b[Sub-Diretor] "
-  Gerente: "&5[Gerente] "
+  Gerente: "&4[Gerente] "
   Coordenador: "&9[Coordenador] "
   Administrador: "&c[Admin] "
   Moderador: "&2[Moderador] "
@@ -48,6 +74,29 @@ tags:
   MiniYT: "&c[MiniYT] &f"
   Vip: "&e[VIP] &f"
   Membro: ""
+  ##Vips
+  #Vips Rankup-CP
+  Pro: "&e[VIP] &f"
+  Semipro: "&e[VIP] &f"
+  Amador: "&e[VIP] &f"
+  #Vips Space
+  Astronauta: "&e[VIP] &f"
+  Marciano: "&e[VIP] &f"
+  Alien: "&e[VIP] &f"
+  Lunático: "&e[VIP] &f"
+  Terráqueo: "&e[VIP] &f"
+  #Vips Ice
+  Infernal: "&e[VIP] &f"
+  Titan: "&e[VIP] &f"
+  Lord: "&e[VIP] &f"
+  Gladiador: "&e[VIP] &f"
+  Guerreiro: "&e[VIP] &f"
+  #Vips Fire OP
+  Imortal: "&e[VIP] &f"
+  King: "&e[VIP] &f"
+  Prince: "&e[VIP] &f"
+  Spartan: "&e[VIP] &f"
+  Soldier: "&e[VIP] &f"
 
 # Forced tags
 forced_tags:
