@@ -41,6 +41,8 @@ public class ConfigProvider {
         return YamlConfiguration.loadConfiguration(f);
     }
 
+    public boolean save(FileConfiguration c) { return save(c, "config.yml"); }
+
     public boolean save(FileConfiguration c, String name){
         File f = new File(lplugin.getDataFolder().getAbsoluteFile() + "plugins" + File.separator + lplugin.getDescription().getName() + File.separator + name);
         if(!f.exists()){
