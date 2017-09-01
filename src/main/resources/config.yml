@@ -16,6 +16,13 @@ server_list:
   - teste
   - teste2
 
+# Messages
+msg:
+  add:
+    usage: "&cUse: /%cmd% <player> <server>"
+  remove:
+    usage: "&cUse: /%cmd% <player>"
+
 # Order Maters! Player will get the highest rank!!
 # If the players has the 1st and 2nd rank, he will get the 1st
 ranks:
