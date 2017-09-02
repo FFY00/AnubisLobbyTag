@@ -6,6 +6,7 @@
 
 package io.github.ffy00;
 
+import io.github.ffy00.executor.PluginCommandExecutor;
 import io.github.ffy00.listeners.PlayerJoinListener;
 import io.github.ffy00.listeners.PlayerQuitListener;
 import io.github.ffy00.provider.ConfigProvider;
@@ -59,6 +60,15 @@ public class AnubisLobbyTag extends JavaPlugin {
         } else {
             pm.registerEvents(new PlayerQuitListener(dp), this);
         }
+    }
+
+    /*
+    * Register Commands
+    */
+    private void registerCommands(){
+        PluginCommandExecutor ce = new PluginCommandExecutor(cp);
+        getCommand("forcartag").setExecutor(ce);
+        getCommand("desforcartag").setExecutor(ce);
     }
 
 }
