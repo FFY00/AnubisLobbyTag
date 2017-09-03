@@ -22,9 +22,11 @@ import java.io.IOException;
 public class ConfigProvider {
 
     protected JavaPlugin lplugin;
+    protected String name;
 
     public ConfigProvider(JavaPlugin plugin){
         lplugin = plugin;
+        name = plugin.getDescription().getName();
     }
 
     public FileConfiguration get(){
